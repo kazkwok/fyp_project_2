@@ -1,0 +1,23 @@
+model:
+  n_mels: 64              # number of Mel spectrogram filters
+  frames: 5               # number of spectrogram frames per sample (sliding window length)
+  n_fft: 1024             # FFT window size for spectrogram
+  hop_length: 512         # hop length for spectrogram
+  latent_dim: 8           # dimension of latent space in autoencoder
+  hidden_dim: 64          # hidden layer size for encoder/decoder
+  loss: mse               # loss function for model (mean squared error for reconstruction)
+training:
+  epochs: 30              # number of training epochs
+  batch_size: 512         # batch size for training
+  learning_rate: 0.001    # learning rate for optimizer
+data:
+  train_normal_dir: "D:/kaz/university/Y4/FYP/testcode/normal_train"     # directory with normal training audio files
+  # train_abnormal_dir: "path/to/train/abnormal"  # (optional) directory with anomaly training files, if any
+  test_normal_dir: "D:/kaz/university/Y4/FYP/testcode/normal_test"       # directory with normal test audio files
+  test_abnormal_dir: "D:/kaz/university/Y4/FYP/testcode/abnormal_test"   # directory with anomalous test audio files
+paths:
+  pretrained_model_path: null   # path to a pre-trained model weights (if resuming training, else null)
+  model_save_path: "D:/kaz/university/Y4/FYP/output/model_outputs/sound_ae_model.h5"  # where to save the trained model
+  loss_plot_path: "D:/kaz/university/Y4/FYP/output/model_outputs/training_loss.png"   # where to save the loss curve plot
+inference:
+  threshold: 0.5           # reconstruction error threshold for anomaly detection (can be tuned)
