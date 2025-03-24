@@ -35,21 +35,3 @@ class AEModel(BaseModel):
         outputs = Dense(self.input_dim, activation=None, name="output_layer")(x)
         # Create the Keras Model
         self.model = Model(inputs=inputs, outputs=outputs, name="AutoencoderModel")
-
-    
-    def build_model(self):
-        """Builds the autoencoder architecture and sets self.model."""
-        # Define the layers of the autoencoder
-        inputs = Input(shape=(self.input_dim,), name="input_layer")
-        # Encoder: two hidden layers (ReLU)
-        x = Dense(self.hidden_dim, activation='relu')(inputs)
-        x = Dense(self.hidden_dim, activation='relu')(x)
-        # Bottleneck (latent representation)
-        latent = Dense(self.latent_dim, activation='relu', name="latent_layer")(x)
-        # Decoder: two hidden layers (ReLU)
-        x = Dense(self.hidden_dim, activation='relu')(latent)
-        x = Dense(self.hidden_dim, activation='relu')(x)
-        # Output layer: reconstruct input_dim (linear activation)
-        outputs = Dense(self.input_dim, activation=None, name="output_layer")(x)
-        # Create the Keras Model
-        self.model = Model(inputs=inputs, outputs=outputs, name="AutoencoderModel")
